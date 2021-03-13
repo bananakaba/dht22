@@ -4,22 +4,22 @@ import plotly.express as px
 
 add = ["time", "humidity", "temperature"]                                   # Beschriftung
 
-print("CSV bitte in dht22 abspeichern.")
+print("Datei bitte in 'csv' abspeichern.")
 filename = input("Datum der CSV eingeben 'dd_mm_yy': ")
 
 
-with open(f"dht22/dht22_{filename}.csv", "r") as infile:                    # Beschriftung hinzufügen falls nicht vorhanden
+with open(f"csv/dht22_{filename}.csv", "r") as infile:                    # Beschriftung hinzufügen falls nicht vorhanden
     reader = list(csv.reader(infile))
     if reader[0] != add:
         reader.insert(0, add)
 
-with open(f"dht22/dht22_{filename}.csv", "w", newline="") as outfile:       # Veränderungen abspeichern
+with open(f"csv/dht22_{filename}.csv", "w", newline="") as outfile:       # Veränderungen abspeichern
     writer = csv.writer(outfile)
     for line in reader:
         writer.writerow(line)
 
 
-df = pd.read_csv(f"dht22/dht22_{filename}.csv")
+df = pd.read_csv(f"csv/dht22_{filename}.csv")
 #print(df.head())
 
 fig1 = px.line(df, x = "time", y = "temperature", title="Temperature")
